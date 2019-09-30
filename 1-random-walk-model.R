@@ -18,6 +18,21 @@ random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
   
   return(output)
 }
+evidence <- 0
+num_loops = 0
+i <- rnorm(1, mean = 0, sd=0.3)
+evidence = evidence + i
+while(-3<evidence && evidence<3){
+  i <- rnorm(1, mean = 0, sd=0.3)
+  evidence = evidence + i
+  num_loops = num_loops + 1
+}
+print(num_loops)
+print(evidence)
+
+
+if (evidence <= -3) {print(FALSE)}
+if (evidence >= 3) {print(TRUE)}
 
 # test the model ####
 
