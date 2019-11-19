@@ -55,3 +55,36 @@ incorrect.data <- initial.test %>% filter(correct==FALSE)
 
 hist(correct.data$rt)
 hist(incorrect.data$rt)
+
+#######SOLUTION CODE
+random.walk.model <- function(samples, drift=0, sdrw=0.3, criterion=3){
+  accuracy.array <- numeric()
+  rt.array <- numeric()
+  
+  for(i in 1:samples){
+    evidence <- 0
+    rt <- 0
+    while(abs(evidence) < criterion){
+      evidence <- evidence + rnorm(1, drift, sdrw)
+      rt <- rt + 1
+    }
+    rt.array[i] <- rt
+    accuracy.array[i] <- (evidence > criterion)
+  }
+  
+  output <- data.frame(
+    correct = accuracy.array,
+    rt = rt.array
+  )
+  
+  return(output)
+  
+}
+####### I give myselef a 3 in thi lab because it was completed in class meaning that I 
+######## colaborated with classmates and also the internet in order to figure out how 
+######## to code the model and also asked professor de leeuw questions to figure out the 
+######## the kinks in the syntax and get the model to function which it did in the end even
+######## though it is slightly different that the solution (naming of variables etc)
+
+
+
